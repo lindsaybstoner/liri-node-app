@@ -14,7 +14,6 @@ if (command === "concert-this") {
     axios.get(`https://rest.bandsintown.com/artists/${input}/?app_id=codingbootcamp`).then(
         function (response) {
 
-
             console.log("The artist/band's name is: " + response.data.name);
 
         }
@@ -23,13 +22,7 @@ if (command === "concert-this") {
     // We then run the request with axios module on a URL with a JSON
     axios.get(`https://rest.bandsintown.com/artists/${input}/events?app_id=codingbootcamp`).then(
         function (response) {
-            //console.log(response);
-
-            /*  let venue = response.venue.name;
-             let date = moment(response.datetime).format("MM/DD/YYYY");
-             let location = `${response.venue.city}, ${response.venue.country}`; */
-
-            //console.log("The artist/band's name is: " + input);
+            
             console.log("The artist/band's is playing at: " + response.data[0].venue.name);
             console.log("Location of the Venue: " + moment(response.data[0].datetime).format("MM/DD/YYYY"));
             console.log("Date of the event: " + response.data[0].venue.city);
@@ -48,9 +41,11 @@ let spotify = new Spotify({
 
 
 if (command === "spotify-this-song") {
-
+    
     spotify.search({ type: 'track', query: input }).then(
         function (response) {
+
+
             //console.log(response);
 
             /*  console.log(response.tracks);
