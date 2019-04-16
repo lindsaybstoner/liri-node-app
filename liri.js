@@ -63,13 +63,9 @@ function spotifyInfo() {
     spotify.search({ type: 'track', query: input }).then(
         function (response) {
             console.log("Song name: " + response.tracks.items[0].name);
-            console.log("----------------------------------------");
             console.log("this is the link to the track preview " + response.tracks.items[0].album.preview_url);
-            console.log("----------------------------------------");
             console.log("this gets the artist/band's name " + response.tracks.items[0].album.artists[0].name);
-            console.log("----------------------------------------");
             console.log("this gets the album name " + response.tracks.items[0].album.name);
-            console.log("----------------------------------------");
             console.log("this gets the link to the album " + response.tracks.items[0].album.external_urls.spotify);
         } 
     );
@@ -83,6 +79,8 @@ function runSpotify() {
     if (!input) {
      
         input = "The+Sign"
+
+        //by Ace of Base
         
         spotifyInfo();
 
