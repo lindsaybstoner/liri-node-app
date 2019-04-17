@@ -4,17 +4,13 @@ const moment = require('moment');
 
 const keys = require("./keys.js");
 
+const Spotify = require('node-spotify-api');
+
+const spotify = new Spotify(keys.spotify);
+
 const axios = require("axios");
 
 const fs = require('fs');
-
-const Spotify = require('node-spotify-api');
-
-const spotify = new Spotify({
-    id: 'ebb9fd21b387499b962ede43a9212592',
-    secret: 'a556a21aba2348e4ab35a3bb38bb7b0d'
-});
-
 
 let command = process.argv[2];
 let input = process.argv.slice(3).join("+");
@@ -78,11 +74,20 @@ function runSpotify() {
 
     if (!input) {
      
-        input = "The+Sign"
+        input = "The+Sign";
 
-        //by Ace of Base
-        
-        spotifyInfo();
+        nameOfArtist = "+Ace+of+Base";
+
+        spotify.search({ type: 'track', query: input + nameOfArtist}).then(
+            function (response) {
+                //console.log(JSON.stringify(response.tracks.items[0], null, 2));
+                console.log("Song name: " + response.tracks.items[0].name);
+                console.log("this is the link to the track preview: " + response.tracks.items[0].album.preview_url);
+                console.log("this gets the artist/band's name: " + response.tracks.items[0].album.artists[0].name);
+                console.log("this gets the album name: " + response.tracks.items[0].album.name);
+                console.log("this gets the link to the album: " + response.tracks.items[0].album.external_urls.spotify);
+            } 
+        );
 
     } else {
         
